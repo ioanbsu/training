@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:annotation-config/>
+
+    <!-- Use the sentinel client if a spring.profiles.active system property is set to one of the following environments -->
+    <beans profile="iPhone">
+        <bean id="context" class="com.artigile.springprofiles.IPhoneContext">
+            <property name="login" value="iPhone Login"/>
+            <property name="password" value="iPhone password"/>
+        </bean>
+    </beans>
+    <!-- If no spring.profiles.active system proprety is set or we're in toronto, use a single host client -->
+    <beans profile="default,android">
+        <bean id="context" class="com.artigile.springprofiles.AndroidContext">
+            <property name="login" value="Android Login"/>
+            <property name="password" value="Android password"/>
+        </bean>
+
+    </beans>
+
+</beans>
